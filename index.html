@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    button {
+      transition: transform 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    #result {
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    .show-result {
+      opacity: 1;
+    }
+
+    @keyframes result-fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+  <title>Excel Comparator</title>
+</head>
+<body>
+  <h1>Excel Comparator</h1>
+  
+  <label for="file1">Pilih file 1:</label>
+  <input type="file" id="file1" name="file1" accept=".xlsx"><br><br>
+
+  <label for="file2">Pilih file 2:</label>
+  <input type="file" id="file2" name="file2" accept=".xlsx"><br><br>
+
+  <label for="startDate">Tanggal Mulai:</label>
+  <input type="date" id="startDate" name="startDate"><br><br>
+
+  <label for="endDate">Tanggal Akhir:</label>
+  <input type="date" id="endDate" name="endDate"><br><br>
+
+  <button onclick="calculateDifference()">Hitung</button>
+
+  <div id="result"></div>
+
+  <script>
+      const { ipcRenderer } = require('electron');
+
+function calculateDifference() {
+  const file1 = document.getElementById('file1').files[0].path;
+  const file2 = document.getElementById('file2').files[0].path;
+  const startDate = document.getElementById('startDate').value;
+  const endDate = document.getElementById('endDate').value;
+  ipcRenderer.invoke('calculate-difference', [file1, file2], startDate, endDate)
+    .then(({ total1, total2, diff }) => {
+      let resultText = 'Total 1:\n' + JSON.stringify(total1, null, 2);
+      resultText += '\n\nTotal 2:\n' + JSON.stringify(total2, null, 2);
+      resultText += '\n\nSelisih:\n' + JSON.stringify(diff, null, 2);
+      const resultDiv = document.getElementById('result');
+      resultDiv.innerText = resultText;
+      resultDiv.style.animation = 'result-fade-in 1s ease forwards';
+    });
+}
+  </script>
+</body>
+</html>
