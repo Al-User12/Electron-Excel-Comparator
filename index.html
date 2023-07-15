@@ -3,6 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <style>
+    body { text-align: center }
+
+    h1 {
+      font-family: sans-serif;
+      font-size: 2em;
+    }
+
+    input[type="file"] {
+      display: block;
+      margin: 0 auto;
+      font-family: sans-serif;
+      font-size: 1.1em;
+    }
+
+    label {
+      font-family: sans-serif;
+      font-size: 1.2em;
+    }
+
+    input[type="date"] {
+      font-family: sans-serif;
+      font-size: 1.2em;
+    }
+
+
+    button {
+      font-family: sans-serif;
+      font-size: 1.2em;
+      padding: 0.5em 1em;
+      border-radius: 0.5em;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+
     button {
       transition: transform 0.3s ease;
     }
@@ -20,12 +56,22 @@
       opacity: 1;
     }
 
+    table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th, td {
+        border: 1px solid black;
+        padding: 10px;
+        text-align: left;
+      }
+
     @keyframes result-fade-in {
       from { opacity: 0; }
       to { opacity: 1; }
     }
   </style>
-  <title>Excel Comparator</title>
+  <title>Code With ❤️ Al-User12</title>
 </head>
 <body>
   <h1>Excel Comparator</h1>
@@ -56,12 +102,33 @@ function calculateDifference() {
   const endDate = document.getElementById('endDate').value;
   ipcRenderer.invoke('calculate-difference', [file1, file2], startDate, endDate)
     .then(({ total1, total2, diff }) => {
-      let resultText = 'Total 1:\n' + JSON.stringify(total1, null, 2);
-      resultText += '\n\nTotal 2:\n' + JSON.stringify(total2, null, 2);
-      resultText += '\n\nSelisih:\n' + JSON.stringify(diff, null, 2);
-      const resultDiv = document.getElementById('result');
-      resultDiv.innerText = resultText;
-      resultDiv.style.animation = 'result-fade-in 1s ease forwards';
+      // let resultText = 'Total 1:\n' + JSON.stringify(total1, null, 2);
+      // resultText += '\n\nTotal 2:\n' + JSON.stringify(total2, null, 2);
+      // resultText += '\n\nSelisih:\n' + JSON.stringify(diff, null, 2);
+      // const resultDiv = document.getElementById('result');
+      // resultDiv.innerText = resultText;
+      // resultDiv.style.animation = 'result-fade-in 1s ease forwards';
+      let resultText = `<h3>Total 1:</h3><table><thead><tr><th>Kategori</th><th>Total</th></tr></thead><tbody>`;
+            for (let category in total1) {
+              resultText += `<tr><td>${category}</td><td>${total1[category]}</td></tr>`;
+            }
+            resultText += '</tbody></table>';
+
+            resultText += `<h3>Total 2:</h3><table><thead><tr><th>Kategori</th><th>Total</th></tr></thead><tbody>`;
+            for (let category in total2) {
+              resultText += `<tr><td>${category}</td><td>${total2[category]}</td></tr>`;
+            }
+            resultText += '</tbody></table>';
+
+            resultText += `<h3>Selisih:</h3><table><thead><tr><th>Kategori</th><th>Selisih</th></tr></thead><tbody>`;
+            for (let category in diff) {
+              resultText += `<tr><td>${category}</td><td>${diff[category]}</td></tr>`;
+            }
+            resultText += '</tbody></table>';
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = resultText;
+            resultDiv.style.animation = 'result-fade-in 1s ease forwards';
     });
 }
   </script>
