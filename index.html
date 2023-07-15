@@ -5,7 +5,9 @@
   <style>
     body { 
       text-align: center;
-      background-color: rgb(255, 255, 255);
+      background: linear-gradient(132deg, #e9e2e3, #a882eb, #666980);
+      background-size: 400% 400%;
+      animation: Gradient 15s ease infinite;
     }
 
     h1 {
@@ -18,7 +20,7 @@
       margin: 0 auto;
       font-family: sans-serif;
       font-size: 1.1em;
-      border: 1px solid #ccc;
+      border: 2.5px solid #2f318b;
       display: inline-block;
       padding: 6px 12px;
       cursor: pointer;
@@ -32,7 +34,7 @@
     input[type="date"] {
       font-family: sans-serif;
       font-size: 1.2em;
-      border: 1px solid #ccc;
+      border: 2.5px solid #2f318b;
       display: inline-block;
       padding: 6px 12px;
       cursor: pointer;
@@ -73,11 +75,12 @@
         width:70%; 
         margin-left:15%; 
         margin-right:15%;
+        margin-bottom: 5%;
       }
       th, td {
         border: 1px solid black;
         padding: 5px 10px;
-        text-align: left;
+        text-align: center;
       }
       tr:nth-child(even) {
         background-color: #eee;
@@ -187,7 +190,7 @@
   <label for="endDate">Tanggal Akhir:</label>
   <input type="date" id="endDate" name="endDate"><br><br>
   </div>
-
+  
   <button onclick="calculateDifference()">Hitung</button>
 
   <div id="result"></div>
