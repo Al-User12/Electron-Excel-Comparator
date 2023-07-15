@@ -104,13 +104,13 @@
 
       .title-word-1 {
         --color-1: #09386d;
-        --color-2: #3D8DAE;
-        --color-3: #8f09b8;
+        --color-2: #19698b;
+        --color-3: #7b079e;
       }
 
       .title-word-2 {
         --color-1: #19066b;
-        --color-2: #d5d0f1;
+        --color-2: #4d33e0;
         --color-3: #17494D;
       }
 
@@ -226,7 +226,7 @@ function calculateDifference() {
             }
             resultText += '</tbody></table>';
 
-            resultText += `<h3>Selisih Per-kategori dari ${fileName1} dan ${fileName2} :</h3><table><thead><tr><th>Kategori</th><th>Selisih</th></tr></thead><tbody>`;
+            resultText += `<h3>Selisih Per-kategori dari ${fileName1} dan ${fileName2}:</h3><table><thead><tr><th>Kategori</th><th>Selisih</th></tr></thead><tbody>`;
             for (let category in diff) {
               resultText += `<tr><td>${category}</td><td>${diff[category]}</td></tr>`;
             }
