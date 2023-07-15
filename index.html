@@ -235,6 +235,7 @@ function calculateDifference() {
             const resultDiv = document.getElementById('result');
             resultDiv.innerHTML = resultText;
             resultDiv.style.animation = 'result-fade-in 1s ease forwards';
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
     });
 }
   </script>
