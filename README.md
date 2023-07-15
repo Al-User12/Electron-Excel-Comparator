@@ -1,8 +1,9 @@
 # Electron-Excel-Comparator
 
-Install Node JS first
-npm i 
-npm i electron-builder -g
+- Install Node JS first
+- npm i 
+- npm i electron-builder -g
+- npm start
 
 # Build for windows user
 
