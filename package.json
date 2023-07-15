@@ -2,6 +2,7 @@
   "dependencies": {
     "electron": "^25.3.0",
     "lodash": "^4.17.21",
+    "path": "^0.12.7",
     "prompt-sync": "^4.2.0",
     "xlsx": "^0.18.5"
   },

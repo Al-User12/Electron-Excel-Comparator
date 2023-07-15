@@ -94,10 +94,13 @@
 
   <script>
       const { ipcRenderer } = require('electron');
+      const path = require('path');
 
 function calculateDifference() {
   const file1 = document.getElementById('file1').files[0].path;
+  const fileName1 = path.basename(file1);
   const file2 = document.getElementById('file2').files[0].path;
+  const fileName2 = path.basename(file2);
   const startDate = document.getElementById('startDate').value;
   const endDate = document.getElementById('endDate').value;
   ipcRenderer.invoke('calculate-difference', [file1, file2], startDate, endDate)
@@ -108,19 +111,19 @@ function calculateDifference() {
       // const resultDiv = document.getElementById('result');
       // resultDiv.innerText = resultText;
       // resultDiv.style.animation = 'result-fade-in 1s ease forwards';
-      let resultText = `<h3>Total 1:</h3><table><thead><tr><th>Kategori</th><th>Total</th></tr></thead><tbody>`;
+      let resultText = `<h3>Total ${fileName1} Dari Tanggal: ${startDate} Sampai ${endDate}:</h3><table><thead><tr><th>Kategori</th><th>Total </th></tr></thead><tbody>`;
             for (let category in total1) {
               resultText += `<tr><td>${category}</td><td>${total1[category]}</td></tr>`;
             }
             resultText += '</tbody></table>';
 
-            resultText += `<h3>Total 2:</h3><table><thead><tr><th>Kategori</th><th>Total</th></tr></thead><tbody>`;
+            resultText += `<h3>Total ${fileName2} Dari Tanggal: ${startDate} Sampai ${endDate}:</h3><table><thead><tr><th>Kategori</th><th>Total</th></tr></thead><tbody>`;
             for (let category in total2) {
               resultText += `<tr><td>${category}</td><td>${total2[category]}</td></tr>`;
             }
             resultText += '</tbody></table>';
 
-            resultText += `<h3>Selisih:</h3><table><thead><tr><th>Kategori</th><th>Selisih</th></tr></thead><tbody>`;
+            resultText += `<h3>Selisih Per-kategori dari ${fileName1} dan ${fileName2} :</h3><table><thead><tr><th>Kategori</th><th>Selisih</th></tr></thead><tbody>`;
             for (let category in diff) {
               resultText += `<tr><td>${category}</td><td>${diff[category]}</td></tr>`;
             }
